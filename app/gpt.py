@@ -1,4 +1,5 @@
 import os
+import copy
 
 """ import openai """
 from dotenv import load_dotenv
@@ -133,19 +134,21 @@ learn_list = [
 ]
 
 
-def make_schedule(dayList, timing):
+def make_schedule():
+    local_learn_list = copy.deepcopy(learn_list)
+    dayList = add_days(local_learn_list)
+    timing = add_timing()
+    lesson_dict = {}
     for day in dayList.keys():
         lessons = dayList[day]
         lessonCount = 1
+        time_dict = {}
         for lesson in lessons:
             timeNum = lesson[0] * 4
             time = timing[lessonCount : lessonCount + timeNum]
             lessonCount += timeNum
-            lesson.append(time)
-
-    print(dayList)
-
-
-dayList = add_days(learn_list)
-timing = add_timing()
-make_schedule(dayList, timing)
+            for slot in time:
+                time_dict[slot] = lesson[1:]
+        lesson_dict[day] = time_dict
+    print(lesson_dict)
+    return lesson_dict

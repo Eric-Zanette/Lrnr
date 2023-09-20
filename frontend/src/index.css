@@ -34,3 +34,7 @@ body {
   height: 5px;
   width: 90px;
 }
+
+.scheduleContainer .schedule .dayContainer .timeSlot.lesson {
+  background-color: rgb(166, 34, 49);
+}

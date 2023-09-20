@@ -20,6 +20,10 @@ const Schedule = () => {
     get_schedule();
   }, []);
 
+  useEffect(() => {
+    console.log(schedule);
+  }, [schedule]);
+
   return (
     <div className="scheduleContainer">
       <div className="schedule">
@@ -28,7 +32,13 @@ const Schedule = () => {
             <div className="dayContainer" key={day}>
               <p>{day}</p>
               {hourList.map((hour) => {
-                return <div className={`timeSlot ${day} ${hour}`}></div>;
+                return (
+                  <div
+                    className={`timeSlot ${day} ${hour} ${
+                      schedule[day] && schedule[day][hour] ? "lesson" : ""
+                    }`}
+                  ></div>
+                );
               })}
             </div>
           );

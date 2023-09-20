@@ -1,5 +1,5 @@
 from flask import request, Flask, jsonify
-from app.gpt import get_dictionary, add_days
+from app.gpt import get_dictionary, add_days, make_schedule
 from app import app
 
 learn_list = [
@@ -71,5 +71,5 @@ def get_schedule():
     topic = request.get_json().get("topic")
     level = request.get_json().get("level")
     """ max_hours = request.get_json().get("max_hours") """
-    result = add_days(learn_list)
+    result = make_schedule()
     return jsonify(result)
